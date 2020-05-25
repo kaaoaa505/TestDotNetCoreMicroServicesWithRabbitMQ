@@ -18,6 +18,7 @@
   <ItemGroup>
     <ProjectReference Include="..\MicroRabbit.Banking.Data\MicroRabbit.Banking.Data.csproj" />
     <ProjectReference Include="..\MicroRabbit.Infra.IoC\MicroRabbit.Infra.IoC.csproj" />
+    <ProjectReference Include="..\MircoRabbit.Banking.Application\MircoRabbit.Banking.Application.csproj" />
   </ItemGroup>
 
 
