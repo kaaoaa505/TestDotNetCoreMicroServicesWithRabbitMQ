@@ -2,10 +2,17 @@
 
 namespace MicroRabbit.Banking.Domain.Commands
 {
-    public class TransferCommand : Command
+    public class AccountTransferCommand : Command
     {
-        public int From { get; set; }
-        public int To { get; set; }
-        public decimal Amount { get; set; }
+        public int From { get; private set; }
+        public int To { get; private set; }
+        public decimal Amount { get; private set; }
+
+        public AccountTransferCommand(int from, int to, decimal transfer)
+        {
+            From = from;
+            To = to;
+            Amount = transfer;
+        }
     }
 }

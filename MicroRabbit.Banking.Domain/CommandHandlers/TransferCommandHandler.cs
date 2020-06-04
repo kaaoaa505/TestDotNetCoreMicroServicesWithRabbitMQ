@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using MicroRabbit.Banking.Domain.Commands;
+using MicroRabbit.Banking.Domain.Events;
 using MicroRabbit.Domain.Core.Bus;
 using System;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MicroRabbit.Banking.Domain.CommandHandlers
 {
-    public class TransferCommandHandler : IRequestHandler<CreateTransferCommand, bool>
+    public class TransferCommandHandler : IRequestHandler<AccountTransferCommand, bool>
     {
         private readonly IEventBus _bus;
 
@@ -18,9 +19,12 @@ namespace MicroRabbit.Banking.Domain.CommandHandlers
             _bus = bus;
         }
 
-        public Task<bool> Handle(CreateTransferCommand request, CancellationToken cancellationToken)
+        public Task<bool> Handle(AccountTransferCommand request, CancellationToken cancellationToken)
         {
             // publish event to RabbitMQ
+
+            _bus.Publish(new TransferCreatedEvent(request.From, request.To, request.Amount));
+
             return Task.FromResult<bool>(true);
         }
     }

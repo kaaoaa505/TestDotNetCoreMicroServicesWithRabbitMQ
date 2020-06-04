@@ -29,7 +29,7 @@ namespace MircoRabbit.Banking.Application.Services
 
         public void Transfer(AccountTransferRequest accountTransfer)
         {
-            var createTransferCommand = new CreateTransferCommand(
+            var createTransferCommand = new AccountTransferCommand(
                 accountTransfer.FromAccount,
                 accountTransfer.ToAccount,
                 accountTransfer.TransferAmount
