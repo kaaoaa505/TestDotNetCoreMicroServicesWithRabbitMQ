@@ -7,6 +7,6 @@ namespace MircoRabbit.Banking.Application.Interfaces
     public interface IAccountService
     {
         IEnumerable<Account> GetAccounts();
-        void TransferFunds(AccountTransferRequest accountTransfer);
+        void Transfer(AccountTransferRequest accountTransfer);
     }
 }

@@ -14,12 +14,12 @@ namespace MircoRabbit.Banking.Application.Services
     public class AccountService : IAccountService
     {
         private readonly IAccountRepository _accountRepository;
-        private readonly IEventBus _eventBus;
+        private readonly IEventBus _bus;
 
         public AccountService(IAccountRepository accountRepository, IEventBus eventBus)
         {
             _accountRepository = accountRepository ?? throw new ArgumentNullException(nameof(accountRepository));
-            _eventBus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
+            _bus = eventBus ?? throw new ArgumentNullException(nameof(eventBus));
         }
 
         public IEnumerable<Account> GetAccounts()
@@ -27,15 +27,14 @@ namespace MircoRabbit.Banking.Application.Services
             return _accountRepository.GetAccounts();
         }
 
-        public void TransferFunds(AccountTransferRequest accountTransfer)
+        public void Transfer(AccountTransferRequest accountTransfer)
         {
-            var accountTransferCommand = new TransferCommand
-            {
-                From = accountTransfer.FromAccount,
-                To = accountTransfer.ToAccount,
-                Amount = accountTransfer.TransferAmount
-            };
-            _eventBus.SendCommand(accountTransferCommand);
+            var createTransferCommand = new CreateTransferCommand(
+                accountTransfer.FromAccount,
+                accountTransfer.ToAccount,
+                accountTransfer.TransferAmount
+            );
+            _bus.SendCommand(createTransferCommand);
         }
     }
 }
