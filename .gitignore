@@ -330,7 +330,9 @@ ASALocalRun/
 .mfractor/
 
 # development settings		
- **/appsettings.Development.json 
+appsettings.Development.json
+**/appsettings.Development.json 
  
 .env
 /src/BankAccountsService/BankAccountsService/appsettings.Development.json
+
